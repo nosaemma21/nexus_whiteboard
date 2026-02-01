@@ -3,6 +3,7 @@ import Express from "express";
 import mongoConnect from "./utils/mongoConnect.js";
 import { config } from "dotenv";
 import logger from "./utils/logger.js";
+import errorHandlingMiddleware from "./middlewares/errorHandlingMiddleware.js";
 
 //to use environment variables in the backend
 config();
@@ -13,6 +14,12 @@ const PORT = process.env.PORT || 5000;
 const MONGO_URI = process.env.MONGO_URI as string;
 
 const app = Express();
+
+//Essentials
+app.use(Express.json());
+
+//error handling
+app.use(errorHandlingMiddleware);
 
 async function bootStrap() {
   try {
