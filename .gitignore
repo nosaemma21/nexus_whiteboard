@@ -1,0 +1,16 @@
+#----dependencies----
+node_modules/
+
+#----environment variables-----
+.env
+
+#----my drafts----
+*.txt
+
+#----db and prisma----
+/server/prisma/migrations
+*.db
+*.db-journal
+
+#----IDE Configs----
+.vscode/
