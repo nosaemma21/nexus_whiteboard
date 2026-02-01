@@ -1,0 +1,52 @@
+generator client {
+   provider = "prisma-client-js"
+   output = "../generated/prisma"
+}
+
+datasource db {
+   provider = "postgresql"
+}
+
+enum Role{
+   OWNER
+   EDITOR
+   VIEWER
+}
+
+model User {
+   id String @id @default(uuid())
+   email String @unique
+   username String @unique
+   password String
+   boards Board[] @relation("BoardOwner")
+   collaborations Collaborator[]
+
+   createdAt DateTime @default(now())
+}
+
+model Board{
+   id String @id @default(uuid())
+   title String
+
+   ownerId String
+   owner User @relation("BoardOwner", fields: [ownerId], references: [id])
+
+   collaborators Collaborator[]
+
+   mongoId String @unique //reminder to connect JSON blob
+   isPublic Boolean @default(false)
+
+   createdAt DateTime @default(now())
+   updatedAt DateTime @updatedAt
+}
+
+model Collaborator{
+   id String @id @default(uuid())
+   role Role @default(EDITOR)
+
+   userId String
+   user User @relation(fields: [userId], references: [id])
+
+   boardId String
+   board Board @relation(fields: [boardId], references: [id])
+}
