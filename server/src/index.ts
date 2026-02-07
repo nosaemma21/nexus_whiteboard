@@ -1,9 +1,14 @@
 import Express from "express";
-
-import mongoConnect from "./utils/mongoConnect.js";
 import { config } from "dotenv";
+
+//----//
+import mongoConnect from "./utils/mongoConnect.js";
 import logger from "./utils/logger.js";
 import errorHandlingMiddleware from "./middlewares/errorHandlingMiddleware.js";
+import boardRoutes from "./routes/board.route.js";
+import collaboratorRoutes from "./routes/collaborator.route.js";
+import userRoutes from "./routes/user.route.js";
+//----//
 
 //to use environment variables in the backend
 config();
@@ -17,6 +22,11 @@ const app = Express();
 
 //Essentials
 app.use(Express.json());
+
+//server routes
+app.use("/api/v1/boards", boardRoutes);
+app.use("/api/v1/collaborators", collaboratorRoutes);
+app.use("/api/v1/users", userRoutes);
 
 //error handling
 app.use(errorHandlingMiddleware);
