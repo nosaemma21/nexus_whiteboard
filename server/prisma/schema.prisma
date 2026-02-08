@@ -13,6 +13,8 @@ enum Role{
    VIEWER
 }
 
+// WILL USE GITHUB AUTH
+
 model User {
    id String @id @default(uuid())
    email String @unique

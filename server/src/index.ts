@@ -4,7 +4,7 @@ import { config } from "dotenv";
 //----//
 import mongoConnect from "./utils/mongoConnect.js";
 import logger from "./utils/logger.js";
-import errorHandlingMiddleware from "./middlewares/errorHandlingMiddleware.js";
+import useErrorHandler from "./middlewares/useErrorHandler.js";
 import boardRoutes from "./routes/board.route.js";
 import collaboratorRoutes from "./routes/collaborator.route.js";
 import userRoutes from "./routes/user.route.js";
@@ -65,7 +65,7 @@ app.use((_req, _res, next) => {
 });
 
 //error handling
-app.use(errorHandlingMiddleware);
+app.use(useErrorHandler);
 
 async function bootStrap() {
   try {

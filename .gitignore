@@ -9,8 +9,12 @@ node_modules/
 
 #----db and prisma----
 /server/prisma/migrations
+/server/generated/prisma
 *.db
 *.db-journal
 
 #----IDE Configs----
 .vscode/
+
+#----typescript----
+/server/dist
